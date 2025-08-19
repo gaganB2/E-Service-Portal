@@ -2,6 +2,10 @@
 
 This project is a modern, fluid, and animated web application that serves as a portal for both service technicians and customers. It facilitates the management of job requests, scheduling, communication, invoicing, and payments in a streamlined interface.
 
+**Live Demo:** [https://e-service-portal-195f5.web.app](https://e-service-portal-195f5.web.app)
+
+---
+
 ## Features
 
 ### General
@@ -39,33 +43,72 @@ This project is a modern, fluid, and animated web application that serves as a p
 - **Styling:** Tailwind CSS
 - **Backend & Database:** Firebase (Authentication, Firestore)
 - **Animations:** Framer Motion
+- **Build Tool:** Vite
 
 ---
 
 ## Running the Project Locally
 
-To run this application on your local machine, you need a local development server. The simplest way to do this is with `npx`, which comes with Node.js.
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (which includes npm and npx) installed on your machine.
+- [Node.js](https://nodejs.org/) (version 18 or higher)
+- [Git](https://git-scm.com/)
+- [Firebase CLI](https://firebase.google.com/docs/cli#install-cli-npm): `npm install -g firebase-tools`
 
 ### Instructions
 
-1.  **Save the Files:** Make sure all the provided project files (`index.html`, `index.tsx`, `App.tsx`, etc.) are in a single folder on your computer.
-
-2.  **Open Your Terminal:** Open a terminal or command prompt.
-
-3.  **Navigate to the Project Directory:** Use the `cd` command to navigate into the folder where you saved the project files.
+1.  **Clone the Repository**
     ```bash
-    cd path/to/your/project-folder
+    git clone [https://github.com/your-username/e-service-portal.git](https://github.com/your-username/e-service-portal.git)
+    cd e-service-portal
     ```
 
-4.  **Start the Local Server:** Run the following command. This will download the `serve` package temporarily and start a server for your project.
+2.  **Install Dependencies**
     ```bash
-    npx serve
+    npm install
     ```
 
-5.  **View the App:** The terminal will output a local address, usually `http://localhost:3000`. Open this URL in your web browser to see the application running.
+3.  **Set Up Firebase**
+    - Go to the [Firebase Console](https://console.firebase.google.com/) and create a new project.
+    - In your project, go to **Project Settings** > **General** and register a new **Web app**.
+    - Firebase will provide a `firebaseConfig` object. You will need these keys.
 
-The server will watch for file changes, but you may need to manually refresh your browser to see the updates. To stop the server, press `Ctrl + C` in the terminal.
+4.  **Configure Environment Variables**
+    - In the root of the project, create a file named `.env.local`.
+    - Copy the template below and paste in the keys from your `firebaseConfig` object.
+
+    **`.env.local` Template:**
+    ```
+    # Paste your Firebase config values here
+    FIREBASE_API_KEY=AIza...
+    FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
+    FIREBASE_PROJECT_ID=your-project-id
+    FIREBASE_STORAGE_BUCKET=your-project-id.appspot.com
+    FIREBASE_MESSAGING_SENDER_ID=123...
+    FIREBASE_APP_ID=1:123...
+    FIREBASE_MEASUREMENT_ID=G-ABC...
+    ```
+
+5.  **Run the Application**
+    ```bash
+    npm run dev
+    ```
+    Open the local URL from your terminal (usually `http://localhost:5173`) to view the app.
+
+---
+
+## Deployment
+
+This project is configured for continuous deployment using **Firebase Hosting** and **GitHub Actions**.
+
+1.  **Push to GitHub:** Create your own repository on GitHub and push your code to the `main` branch.
+
+2.  **Initialize Firebase Hosting:** Run `firebase init hosting` and follow the prompts, choosing to set up automatic builds with GitHub.
+
+3.  **Add GitHub Secrets:** For the deployment to work, you must add your environment variables to your GitHub repository's secrets.
+    - Go to your GitHub repo > **Settings** > **Secrets and variables** > **Actions**.
+    - Add a new repository secret for each of the `FIREBASE_...` keys from your `.env.local` file.
+
+Once configured, every push to the `main` branch will automatically build and deploy your application.
